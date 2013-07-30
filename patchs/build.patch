@@ -1,7 +1,7 @@
 Index: talk/libjingle.scons
 ===================================================================
---- talk/libjingle.scons	(revision 377)
-+++ talk/libjingle.scons	(working copy)
+--- talk/libjingle.scons    (revision 377)
++++ talk/libjingle.scons    (working copy)
 @@ -22,13 +22,13 @@
  )
  talk.Library(env, name = "gunit",
@@ -23,7 +23,7 @@ Index: talk/libjingle.scons
                 "GTEST_RELATIVE_PATH",
                 "SRTP_RELATIVE_PATH",
                 "XML_STATIC",
-+			            "DISABLE_YUV",
++               "DISABLE_YUV",
               ],
               srcs = [
                 "base/asyncfile.cc",
@@ -39,8 +39,8 @@ Index: talk/libjingle.scons
                 "base/versionparsing.cc",
                 "base/virtualsocketserver.cc",
                 "base/worker.cc",
-+			            "p2p/base/basicpacketsocketfactory.cc",
-+			            "p2p/base/asyncstuntcpsocket.cc",
++               "p2p/base/basicpacketsocketfactory.cc",
++               "p2p/base/asyncstuntcpsocket.cc",
                 "p2p/base/constants.cc",
                 "p2p/base/dtlstransportchannel.cc",
                 "p2p/base/p2ptransport.cc",
@@ -66,15 +66,40 @@ Index: talk/libjingle.scons
               ],
               cppdefines = [
                 "EXPAT_RELATIVE_PATH",
-@@ -528,6 +530,7 @@
+@@ -481,6 +483,24 @@
+            "srtp",
+          ],
+ )
++talk.App(env, name = "pcp",
++         srcs = [
++           "examples/pcp/pcp_main.cc",
++         ],
++         libs = [
++           "jingle",
++           "expat",
++           "srtp",
++         ],
++         cppdefines = [
++           "GTEST_RELATIVE_PATH",                
++         ],
++         includedirs = [
++           "third_party/gtest/include",
++           "third_party/gtest",
++         ],
++         posix_libs = SSL_LIBS,
++)
+ talk.App(env, name = "relayserver",
+          libs = [
+            "jingle",
+@@ -528,6 +548,7 @@
                  "EXPAT_RELATIVE_PATH",
                  "GTEST_RELATIVE_PATH",
                  "SRTP_RELATIVE_PATH",
-+			            	"DISABLE_YUV",
++                "DISABLE_YUV",
                ],
                srcs = [
                  "base/asynchttprequest_unittest.cc",
-@@ -589,10 +592,10 @@
+@@ -589,10 +610,10 @@
                  "base/windowpicker_unittest.cc",
                ],
                includedirs = [
@@ -87,15 +112,15 @@ Index: talk/libjingle.scons
                ],
                win_srcs = [
                  "base/win32_unittest.cc",
-@@ -623,6 +626,7 @@
+@@ -623,6 +644,7 @@
                  "EXPAT_RELATIVE_PATH",
                  "GTEST_RELATIVE_PATH",
                  "SRTP_RELATIVE_PATH",
-+				            "DISABLE_YUV",
++                "DISABLE_YUV",
                ],
                srcs = [
                  "p2p/base/dtlstransportchannel_unittest.cc",
-@@ -644,10 +648,11 @@
+@@ -644,10 +666,11 @@
                  "p2p/client/portallocator_unittest.cc",
                ],
                includedirs = [
@@ -105,19 +130,19 @@ Index: talk/libjingle.scons
                  "third_party/srtp",
 -                "testing/gtest",
 +                "third_party/gtest",
-+            				"third_party/libyuv/include",
++                "third_party/libyuv/include",
                ],
                libs = [
                  "jingle",
-@@ -663,6 +668,7 @@
+@@ -663,6 +686,7 @@
                  "EXPAT_RELATIVE_PATH",
                  "GTEST_RELATIVE_PATH",
                  "SRTP_RELATIVE_PATH",
-+				            "DISABLE_YUV",
++                "DISABLE_YUV",
                ],
                srcs = [
                  "media/base/capturemanager_unittest.cc",
-@@ -688,10 +694,10 @@
+@@ -688,10 +712,10 @@
                  "session/media/ssrcmuxfilter_unittest.cc",
                ],
                includedirs = [
@@ -130,7 +155,7 @@ Index: talk/libjingle.scons
                ],
                libs = [
                  "jingle",
-@@ -712,10 +718,10 @@
+@@ -712,10 +736,10 @@
                mac_libs = SSL_LIBS,
  
                includedirs = [
@@ -143,7 +168,7 @@ Index: talk/libjingle.scons
                ],
                cppdefines = [
                  "EXPAT_RELATIVE_PATH",
-@@ -738,10 +744,10 @@
+@@ -738,10 +762,10 @@
                ],
                mac_libs = SSL_LIBS,
                includedirs = [
@@ -156,7 +181,7 @@ Index: talk/libjingle.scons
                ],
                cppdefines = [
                  "EXPAT_RELATIVE_PATH",
-@@ -772,10 +778,10 @@
+@@ -772,10 +796,10 @@
                  "xmpp/xmppstanzaparser_unittest.cc",
                ],
                includedirs = [
@@ -171,15 +196,15 @@ Index: talk/libjingle.scons
                  "jingle",
 Index: talk/main.scons
 ===================================================================
---- talk/main.scons	(revision 377)
-+++ talk/main.scons	(working copy)
+--- talk/main.scons (revision 377)
++++ talk/main.scons (working copy)
 @@ -156,7 +156,8 @@
      '/GR-',         # disable RTTI
      '/Gy',          # enable function level linking
      '/wd4996',      # ignore POSIX deprecated warnings
 -
 +    '/wd4503',      # ignore warning 4503
-+	
++   
      # promote certain level 4 warnings
      '/w14701',     # potentially uninitialized var
      '/w14702',     # unreachable code
