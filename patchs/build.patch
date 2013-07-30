@@ -23,7 +23,7 @@ Index: talk/libjingle.scons
                 "GTEST_RELATIVE_PATH",
                 "SRTP_RELATIVE_PATH",
                 "XML_STATIC",
-+			   "DISABLE_YUV",
++			            "DISABLE_YUV",
               ],
               srcs = [
                 "base/asyncfile.cc",
@@ -39,8 +39,8 @@ Index: talk/libjingle.scons
                 "base/versionparsing.cc",
                 "base/virtualsocketserver.cc",
                 "base/worker.cc",
-+			   "p2p/base/basicpacketsocketfactory.cc",
-+			   "p2p/base/asyncstuntcpsocket.cc",
++			            "p2p/base/basicpacketsocketfactory.cc",
++			            "p2p/base/asyncstuntcpsocket.cc",
                 "p2p/base/constants.cc",
                 "p2p/base/dtlstransportchannel.cc",
                 "p2p/base/p2ptransport.cc",
@@ -70,7 +70,7 @@ Index: talk/libjingle.scons
                  "EXPAT_RELATIVE_PATH",
                  "GTEST_RELATIVE_PATH",
                  "SRTP_RELATIVE_PATH",
-+				"DISABLE_YUV",
++			            	"DISABLE_YUV",
                ],
                srcs = [
                  "base/asynchttprequest_unittest.cc",
@@ -91,7 +91,7 @@ Index: talk/libjingle.scons
                  "EXPAT_RELATIVE_PATH",
                  "GTEST_RELATIVE_PATH",
                  "SRTP_RELATIVE_PATH",
-+				"DISABLE_YUV",
++				            "DISABLE_YUV",
                ],
                srcs = [
                  "p2p/base/dtlstransportchannel_unittest.cc",
@@ -105,7 +105,7 @@ Index: talk/libjingle.scons
                  "third_party/srtp",
 -                "testing/gtest",
 +                "third_party/gtest",
-+				"third_party/libyuv/include",
++            				"third_party/libyuv/include",
                ],
                libs = [
                  "jingle",
@@ -113,7 +113,7 @@ Index: talk/libjingle.scons
                  "EXPAT_RELATIVE_PATH",
                  "GTEST_RELATIVE_PATH",
                  "SRTP_RELATIVE_PATH",
-+				"DISABLE_YUV",
++				            "DISABLE_YUV",
                ],
                srcs = [
                  "media/base/capturemanager_unittest.cc",
@@ -178,7 +178,7 @@ Index: talk/main.scons
      '/Gy',          # enable function level linking
      '/wd4996',      # ignore POSIX deprecated warnings
 -
-+	'/wd4503',      # ignore warning 4503
++    '/wd4503',      # ignore warning 4503
 +	
      # promote certain level 4 warnings
      '/w14701',     # potentially uninitialized var
