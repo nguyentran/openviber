@@ -1,0 +1,16 @@
+cd libjingle-read-only
+svn info
+Path: .
+Working Copy Root Path: E:\openviber\libjingle-read-only
+URL: http://libjingle.googlecode.com/svn/trunk
+Repository Root: http://libjingle.googlecode.com/svn
+Repository UUID: dd674b97-3498-5ee5-1854-bdd07cd0ff33
+Revision: 377
+Node Kind: directory
+Schedule: normal
+Last Changed Author: hellner@google.com
+Last Changed Rev: 377
+Last Changed Date: 2013-07-23 23:44:51 +0700 (Tue, 23 Jul 2013)
+
+
+svn diff > build.patch
