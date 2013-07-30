@@ -1,0 +1,185 @@
+Index: talk/libjingle.scons
+===================================================================
+--- talk/libjingle.scons	(revision 377)
++++ talk/libjingle.scons	(working copy)
+@@ -22,13 +22,13 @@
+ )
+ talk.Library(env, name = "gunit",
+              srcs = [
+-               "testing/gtest/src/gtest-all.cc",
++               "third_party/gtest/src/gtest-all.cc",
+              ],
+              includedirs = [
+-               "testing/gtest/include",
++               "third_party/gtest/include",
+                "third_party/expat-2.0.1/lib",
+                "third_party/srtp",
+-               "testing/gtest",
++               "third_party/gtest",
+              ],
+              cppdefines = [
+                "EXPAT_RELATIVE_PATH",
+@@ -150,6 +150,7 @@
+                "GTEST_RELATIVE_PATH",
+                "SRTP_RELATIVE_PATH",
+                "XML_STATIC",
++			   "DISABLE_YUV",
+              ],
+              srcs = [
+                "base/asyncfile.cc",
+@@ -160,7 +161,6 @@
+                "base/autodetectproxy.cc",
+                "base/bandwidthsmoother.cc",
+                "base/base64.cc",
+-               "base/basicpacketsocketfactory.cc",
+                "base/bytebuffer.cc",
+                "base/checks.cc",
+                "base/common.cc",
+@@ -235,6 +235,8 @@
+                "base/versionparsing.cc",
+                "base/virtualsocketserver.cc",
+                "base/worker.cc",
++			   "p2p/base/basicpacketsocketfactory.cc",
++			   "p2p/base/asyncstuntcpsocket.cc",
+                "p2p/base/constants.cc",
+                "p2p/base/dtlstransportchannel.cc",
+                "p2p/base/p2ptransport.cc",
+@@ -355,7 +357,7 @@
+              includedirs = [
+                "third_party/libudev",
+                "third_party/expat-2.0.1/lib",
+-               "testing/gtest/include",
++               "third_party/gtest/include",
+                "third_party/srtp/include",
+                "third_party/srtp/crypto/include",
+              ] + SSL_INCLUDES,
+@@ -405,10 +407,10 @@
+                "base/unittest_main.cc",
+              ],
+              includedirs = [
+-               "testing/gtest/include",
++               "third_party/gtest/include",
+                "third_party/expat-2.0.1/lib",
+                "third_party/srtp",
+-               "testing/gtest",
++               "third_party/gtest",
+              ],
+              cppdefines = [
+                "EXPAT_RELATIVE_PATH",
+@@ -528,6 +530,7 @@
+                 "EXPAT_RELATIVE_PATH",
+                 "GTEST_RELATIVE_PATH",
+                 "SRTP_RELATIVE_PATH",
++				"DISABLE_YUV",
+               ],
+               srcs = [
+                 "base/asynchttprequest_unittest.cc",
+@@ -589,10 +592,10 @@
+                 "base/windowpicker_unittest.cc",
+               ],
+               includedirs = [
+-                "testing/gtest/include",
++                "third_party/gtest/include",
+                 "third_party/expat-2.0.1/lib",
+                 "third_party/srtp",
+-                "testing/gtest",
++                "third_party/gtest",
+               ],
+               win_srcs = [
+                 "base/win32_unittest.cc",
+@@ -623,6 +626,7 @@
+                 "EXPAT_RELATIVE_PATH",
+                 "GTEST_RELATIVE_PATH",
+                 "SRTP_RELATIVE_PATH",
++				"DISABLE_YUV",
+               ],
+               srcs = [
+                 "p2p/base/dtlstransportchannel_unittest.cc",
+@@ -644,10 +648,11 @@
+                 "p2p/client/portallocator_unittest.cc",
+               ],
+               includedirs = [
+-                "testing/gtest/include",
++                "third_party/gtest/include",
+                 "third_party/expat-2.0.1/lib",
+                 "third_party/srtp",
+-                "testing/gtest",
++                "third_party/gtest",
++				"third_party/libyuv/include",
+               ],
+               libs = [
+                 "jingle",
+@@ -663,6 +668,7 @@
+                 "EXPAT_RELATIVE_PATH",
+                 "GTEST_RELATIVE_PATH",
+                 "SRTP_RELATIVE_PATH",
++				"DISABLE_YUV",
+               ],
+               srcs = [
+                 "media/base/capturemanager_unittest.cc",
+@@ -688,10 +694,10 @@
+                 "session/media/ssrcmuxfilter_unittest.cc",
+               ],
+               includedirs = [
+-                "testing/gtest/include",
++                "third_party/gtest/include",
+                 "third_party/expat-2.0.1/lib",
+                 "third_party/srtp",
+-                "testing/gtest",
++                "third_party/gtest",
+               ],
+               libs = [
+                 "jingle",
+@@ -712,10 +718,10 @@
+               mac_libs = SSL_LIBS,
+ 
+               includedirs = [
+-                "testing/gtest/include",
++                "third_party/gtest/include",
+                 "third_party/expat-2.0.1/lib",
+                 "third_party/srtp",
+-                "testing/gtest",
++                "third_party/gtest",
+               ],
+               cppdefines = [
+                 "EXPAT_RELATIVE_PATH",
+@@ -738,10 +744,10 @@
+               ],
+               mac_libs = SSL_LIBS,
+               includedirs = [
+-                "testing/gtest/include",
++                "third_party/gtest/include",
+                 "third_party/expat-2.0.1/lib",
+                 "third_party/srtp",
+-                "testing/gtest",
++                "third_party/gtest",
+               ],
+               cppdefines = [
+                 "EXPAT_RELATIVE_PATH",
+@@ -772,10 +778,10 @@
+                 "xmpp/xmppstanzaparser_unittest.cc",
+               ],
+               includedirs = [
+-                "testing/gtest/include",
++                "third_party/gtest/include",
+                 "third_party/expat-2.0.1/lib",
+                 "third_party/srtp",
+-                "testing/gtest",
++                "third_party/gtest",
+               ],
+               libs = [
+                 "jingle",
+Index: talk/main.scons
+===================================================================
+--- talk/main.scons	(revision 377)
++++ talk/main.scons	(working copy)
+@@ -156,7 +156,8 @@
+     '/GR-',         # disable RTTI
+     '/Gy',          # enable function level linking
+     '/wd4996',      # ignore POSIX deprecated warnings
+-
++	'/wd4503',      # ignore warning 4503
++	
+     # promote certain level 4 warnings
+     '/w14701',     # potentially uninitialized var
+     '/w14702',     # unreachable code
