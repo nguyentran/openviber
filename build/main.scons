@@ -32,7 +32,7 @@ import platform
 # When no particular order is imposed by library dependencies, try to keep in
 # mostly alphabetical order.
 #
-components = talk.Components("libjingle.scons")
+components = talk.Components("../third_party/libjingle/talk/libjingle.scons")
 
 #-------------------------------------------------------------------------------
 # Build environments
