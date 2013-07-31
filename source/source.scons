@@ -1,0 +1,94 @@
+import talk
+Import("env")
+
+talk.App(env, name = "login",
+         libs = [
+           "jingle",
+           "expat",
+         ],
+         srcs = [
+           "login/login_main.cc",
+         ],
+         posix_libs = SSL_LIBS,
+         lin_libs = [
+           "videorenderer",
+         ],
+)
+talk.App(env, name = "chat",
+         libs = [
+           "jingle",
+           "expat",
+         ],
+         srcs = [
+           "chat/chatapp.cc",
+           "chat/chat_main.cc",
+           "chat/consoletask.cc",
+           "chat/textchatreceivetask.cc",
+           "chat/textchatsendtask.cc",
+         ],
+         posix_libs = SSL_LIBS,
+)
+talk.App(env, name = "call",
+         mac_frameworks = [
+           "AudioToolbox",
+           "AudioUnit",
+           "Cocoa",
+           "CoreAudio",
+           "CoreFoundation",
+           "IOKit",
+           "QTKit",
+           "QuickTime",
+         ],
+         win_libs = [
+           "d3d9.lib",
+           "gdi32.lib",
+           "powrprof.lib",
+           "strmiids.lib",
+           "winmm.lib",
+         ],
+         posix_libs = SSL_LIBS,
+         lin_libs = [
+           "videorenderer",
+         ],
+         srcs = [
+           "call/call_main.cc",
+           "call/callclient.cc",
+           "call/console.cc",
+           "call/friendinvitesendtask.cc",
+           "call/mediaenginefactory.cc",
+           "call/mucinviterecvtask.cc",
+           "call/mucinvitesendtask.cc",
+           "call/presencepushtask.cc",
+         ],
+         libs = [
+           "jingle",
+           "expat",
+           "srtp",
+         ],
+)
+talk.App(env, name = "pcp",
+         srcs = [
+           "pcp/pcp_main.cc",
+         ],
+         libs = [
+           "jingle",
+           "expat",
+           "srtp",
+         ],
+		 cppdefines = [
+           "GTEST_RELATIVE_PATH",                
+         ],
+		 includedirs = [
+           "../third_party/libjingle/talk/third_party/gtest/include",
+           "../third_party/libjingle/talk/third_party/gtest",
+         ],
+		 posix_libs = SSL_LIBS,
+)
+talk.App(env, name = "relayserver",
+         libs = [
+           "jingle",
+         ],
+         srcs = [
+           "p2p/base/relayserver_main.cc",
+         ],
+)
